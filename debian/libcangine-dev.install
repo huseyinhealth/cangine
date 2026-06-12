@@ -1,3 +1,4 @@
-usr/lib/*/libcangine.so
 usr/include/
+usr/lib/*/cmake/cangine/
+usr/lib/*/libcangine.so
 usr/share/cangine/

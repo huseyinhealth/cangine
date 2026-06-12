@@ -1,0 +1,15 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(glfw3 REQUIRED)
+find_dependency(Freetype REQUIRED)
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(EPOXY REQUIRED IMPORTED_TARGET epoxy)
+    pkg_check_modules(FONTCONFIG REQUIRED IMPORTED_TARGET fontconfig)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/cangineTargets.cmake")
+
+check_required_components(cangine)
