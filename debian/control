@@ -1,0 +1,42 @@
+Source: cangine
+Section: libs
+Priority: optional
+Maintainer: Hüseyin Can Erdem <hello@cnhsync.dev>
+Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.15),
+               pkg-config,
+               libglfw3-dev,
+               libfreetype-dev,
+               libepoxy-dev,
+               libfontconfig-dev
+Standards-Version: 4.7.4
+Rules-Requires-Root: no
+Homepage: https://github.com/huseyinhealth/cangine
+Vcs-Browser: https://github.com/huseyinhealth/cangine
+Vcs-Git: https://github.com/huseyinhealth/cangine.git
+
+Package: libcangine1
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: C++/OpenGL 2D game engine — shared library
+ cangine is a lightweight C++17/OpenGL 2D game engine providing a
+ component-based entity system, text rendering via FreeType, audio
+ via miniaudio, and a simple windowing and input layer built on GLFW.
+ .
+ This package contains the shared library.
+
+Package: libcangine-dev
+Architecture: any
+Depends: ${misc:Depends},
+         libcangine1 (= ${binary:Version}),
+         libglfw3-dev,
+         libfreetype-dev,
+         libepoxy-dev,
+         libfontconfig-dev
+Description: C++/OpenGL 2D game engine — development files
+ cangine is a lightweight C++17/OpenGL 2D game engine providing a
+ component-based entity system, text rendering via FreeType, audio
+ via miniaudio, and a simple windowing and input layer built on GLFW.
+ .
+ This package contains the shared library symlink, public headers, and
+ default shaders needed to build applications against cangine.

@@ -1,0 +1,7 @@
+cmake_minimum_required (VERSION 3.10)
+
+project("!!projectname!!")
+
+add_executable(!!projectname!! !!projectname!!.cpp)
+add_subdirectory(external/cangine)
+target_link_libraries(!!projectname!! PUBLIC cangine)
