@@ -1,3 +1,10 @@
+cangine (0.1.0-2) unstable; urgency=low
+
+  * Add CMake export config for find_package(cangine) support
+  * Install miniaudio.h and stb_image.h headers for development use
+
+ -- Hüseyin Can Erdem <hello@cnhsync.dev>  Fri, 12 Jun 2026 17:04:35 +0300
+
 cangine (0.1.0-1) unstable; urgency=low
 
   * Initial Debian packaging. (Closes: #1139714)

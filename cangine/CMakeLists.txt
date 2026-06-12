@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
-project(cangine)
+project(cangine VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
 find_package(glfw3 REQUIRED)
 find_package(Freetype REQUIRED)
@@ -56,8 +57,9 @@ add_library(cangine SHARED
 # Include paths
 target_include_directories(cangine PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-    external/stb_image
-    external/miniaudio
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/external/stb_image>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/external/miniaudio>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 target_link_libraries(cangine PUBLIC
@@ -74,8 +76,35 @@ set_target_properties(cangine PROPERTIES
 
 install(
     TARGETS cangine
+    EXPORT cangineTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(
+    EXPORT cangineTargets
+    FILE cangineTargets.cmake
+    NAMESPACE cangine::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cangine
+)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cangineConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cangineConfig.cmake"
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cangine
+)
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/cangineConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/cangineConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/cangineConfigVersion.cmake"
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/cangine
 )
 install(
     DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/cangine"
